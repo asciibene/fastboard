@@ -1,19 +1,39 @@
-<?php
-require('./script/helper_funcs.php');
+<?php 
+require './script/helper_funcs.php';
+
+if (isset($_POST['action']) and isset($_POST['sent_name']) and isset($_POST['sent_pwd'])){
+  if($_POST["action"]=="login"){
+    if(login_complete()){
+      notify("You are now logged in.");
+    }else{
+      print_error("Bad login");
+    }
+  }
+  elseif($_POST["action"]=="register"){
+    if($db->new_user($_POST['sent_name'],$_POST['sent_pwd'])){
+      
+    }else{
+      print_error("bad register");
+    }
+  }
+}
 ?>
 <!doctype html>
 <html>
 <head>
 	<title>Fastboard</title>
 	<link rel="stylesheet" type="text/css" href="style.css" />  
+	<script src="./script/misc.js"></script>
 </head>
 <body>
-<?php if(checksec($_COOKIE["uindex"],$_COOKIE["uhash"])){
-  # login Verified
-  }
+<h1>Welcome to fastboard! </h1>
+<div>
+<?php
+global $db;
+foreach ($db->threads as $t) {
+    echo $t;
+}
 ?>
-<h1>Welcome to fastboard!</h1>
-<?php show_threads(); ?>
 </div>
 </body>
 </html>
