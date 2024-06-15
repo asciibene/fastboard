@@ -7,7 +7,10 @@ require './script/helper_funcs.php'; ?>
 	<link rel="stylesheet" type="text/css" href="style.css" />  
 </head>
 <body>
-<?php if (checksec($db->users[$_COOKIE['userid']], $_COOKIE['sentpwd'])) {
+<?php if (checksec($db->users[$_COOKIE['__uuid']], $_COOKIE['__hash'])) {
+
+
+
 } ?>
 <h1>Welcome to fastboard!</h1>
 <div>

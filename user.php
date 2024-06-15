@@ -27,7 +27,7 @@ require './script/helper_funcs.php'; ?>
   </form>_user
 <?php elseif($_GET['action'] ?? false == "view_user" and isset($_GET["uuid"])):?>
 
-<?php else: ?>_user
+<?php else: ?>
 <a href="?action=login_form">Login</a>
 <a href="?action=register_form">Register</a>
 <?php endif; ?>

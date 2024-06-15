@@ -2,8 +2,8 @@
 require './script/helper_funcs.php';
 
 if (isset($_POST['action']) and isset($_POST['sent_name']) and isset($_POST['sent_pwd'])){
-  if($_POST["action"]=="login"){
-    if(login_complete()){
+  if($_POST["action"]=="login" and isset($_POST["sent_name"]) and isset($_POST['sent_pwd'])){
+    if(checksec()){
       notify("You are now logged in.");
     }else{
       print_error("Bad login");
@@ -11,7 +11,9 @@ if (isset($_POST['action']) and isset($_POST['sent_name']) and isset($_POST['sen
   }
   elseif($_POST["action"]=="register"){
     if($db->new_user($_POST['sent_name'],$_POST['sent_pwd'])){
-      
+      if(login_complete()){
+        notify("Registration sucess");
+      }
     }else{
       print_error("bad register");
     }
@@ -31,7 +33,7 @@ if (isset($_POST['action']) and isset($_POST['sent_name']) and isset($_POST['sen
 <?php
 global $db;
 foreach ($db->threads as $t) {
-    echo $t;
+    echo "<sup>".$t->score."</sup>".$t;
 }
 ?>
 </div>
